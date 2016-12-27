@@ -1,6 +1,6 @@
 # File System Library
 
-The script include multiple function related with file system operation. I write this because i don't want reuse same function again and again.
+The script include multiple functions related with file system operation. I write this because i don't want rewrite same function again and again. This is util function.
 
 ## Functions and operation
 ### Function List
