@@ -216,7 +216,34 @@ def renameFileWithHashValue(directory):
 		ext = name.split('.')[-1]
 		destinationFilename = path+os.sep+hashValue+'.'+ext
 		os.rename(sourceFilename,destinationFilename)	
-			
+
+'''
+# Collect deeply all files from directory and change their extensions
+#
+# param directory : <string> directory name
+# param oldExt : <string> old file extension type
+# param newExt : <string> new file extension type
+#
+# return void
+#
+'''
+def changeFileExtension(directory, newExt, oldExt='.*' ):
+
+	listOfFiles = getFilePaths(directory)	
+
+	for sourceFilename in listOfFiles:
+		#print (sourceFilename)
+		basefilename = os.path.splitext(sourceFilename)[0]
+		extension	 = os.path.splitext(sourceFilename)[1]
+
+		if oldExt != '.*':
+			if sourceFilename.endswith(oldExt):
+				destinationFilename = basefilename+newExt
+				os.rename(sourceFilename,destinationFilename)	
+		else :
+			destinationFilename = basefilename+newExt
+			os.rename(sourceFilename,destinationFilename)	
+				
 if __name__ == '__main__':
 	
 	directory = sys.argv[1]
@@ -231,8 +258,8 @@ if __name__ == '__main__':
 	# groupFile = groupFilesAsExtension(listOfFile)
 	# printDict(groupFile)
 
-	renameFileWithHashValue(directory)
-
+	# renameFileWithHashValue(directory)
+	changeFileExtension(directory, '.pyn')
 	end = time.time()
 	print ('End time : '+str(time.clock()))
 	print('Running time : '+str(end - start))

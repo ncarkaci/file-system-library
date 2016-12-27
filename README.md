@@ -12,6 +12,7 @@ The script include multiple functions related with file system operation. I writ
 * moveFiles(listOfFile, destinationDir)
 * printDict(extensionDict)
 * renameFileWithHashValue(directory)
+* changeFileExtension(directory, newExt, oldExt='.*' )
 
 ### Function Details
 
@@ -82,5 +83,16 @@ Collect deeply all files from directory and calculate md5 hash values of the fil
 param directory : <string> directory name
 
 return void
+
+#### changeFileExtension(directory, newExt, oldExt='.*' )
+
+Collect deeply all files from directory and change their extensions
+
+param directory : <string> directory name
+param oldExt : <string> old file extension type
+param newExt : <string> new file extension type
+
+return void
+
 
 
