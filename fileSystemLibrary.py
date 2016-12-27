@@ -112,7 +112,7 @@ def groupFilesAsExtension(listOfFile):
 # return <dict> (<key><value>) : non-unique groups in dictionary
 #
 '''
-def filterUniqueFileSizes(fileGroupDict):
+def filterUniqueGroupFromDict(fileGroupDict):
 
 	uniqueFileSizeDict = {}
 
@@ -171,18 +171,17 @@ def getFileHash(filename, fastHash=False, buf=(1024*1024)):
 def moveFiles(listOfFile, destinationDir):
 
 	for filename in listOfFile:
-		path, name 	    = os.path.split(filename)
-		prefix_num 	    = random.randrange(1,99999999)
-		destinationdirPath  = os.getcwd()+os.sep+destinationDir
-		
-		if not os.if not os.path.exists(destinationdirPath):
-			os.makedirs(destinationdirPath)
-			
-		destinationFilename = destinationdirPath+os.sep+str(prefix_num)+"_"+name
-		os.rename(filename,destinationFilename)
+		path, name 	= os.path.split(filename)
+		prefix_num 	= random.randrange(1,99999999)
+
+		if not os.path.exists(destinationDir):
+			os.makdirs(destinationDir)
+
+		destinationFilename = os.getcwd()+os.sep+destinationDir+os.sep+str(prefix_num)+"_"
+		os.rename(filename,destinationFilename+name)
 
 '''
-# Get dictionary which its key has multiple values and print this
+# Print dictionary which its key has multiple values and print this
 #
 # param extensionDict : <dict> (<string><string list>) dictionary
 #
@@ -213,12 +212,9 @@ def renameFileWithHashValue(directory):
 
 	for sourceFilename in listOfFiles:
 		hashValue = getFileHash(sourceFilename)
-		print (hashValue)
 		path, name = os.path.split(sourceFilename)
 		ext = name.split('.')[-1]
-		print (path+'\t'+name+'\t'+ext)
 		destinationFilename = path+os.sep+hashValue+'.'+ext
-		print (destinationFilename)
 		os.rename(sourceFilename,destinationFilename)	
 			
 if __name__ == '__main__':
