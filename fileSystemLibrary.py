@@ -167,16 +167,19 @@ def getFileHash(filename, fastHash=False, buf=(1024*1024)):
 #
 # return void
 #
-# Todo : Check destionation directory not exists, create it
 '''
 def moveFiles(listOfFile, destinationDir):
 
 	for filename in listOfFile:
-		path, name 	= os.path.split(filename)
-		prefix_num 	= random.randrange(1,99999999)
-		# warn add this if directory not exists
-		destinationFilename = os.getcwd()+os.sep+destinationDir+os.sep+str(prefix_num)+"_"
-		os.rename(filename,destinationFilename+name)
+		path, name 	    = os.path.split(filename)
+		prefix_num 	    = random.randrange(1,99999999)
+		destinationdirPath  = os.getcwd()+os.sep+destinationDir
+		
+		if not os.if not os.path.exists(destinationdirPath):
+			os.makedirs(destinationdirPath)
+			
+		destinationFilename = destinationdirPath+os.sep+str(prefix_num)+"_"+name
+		os.rename(filename,destinationFilename)
 
 '''
 # Get dictionary which its key has multiple values and print this
