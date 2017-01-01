@@ -11,6 +11,7 @@
 
 import os, sys, time, random
 import hashlib
+from shutil import copyfile
 from collections import OrderedDict # for sort dict 
 
 '''
@@ -243,6 +244,36 @@ def changeFileExtension(directory, newExt, oldExt='.*' ):
 		else :
 			destinationFilename = basefilename+newExt
 			os.rename(sourceFilename,destinationFilename)	
+
+'''
+# Collect deeply all files from directory and change their extensions
+# And copy them destination directory.
+# If there duplicate name file. It adds prefix filename
+#
+# param directory : <string> directory name
+# param oldExt : <string> file extension type
+# param newExt : <string> destination directory name
+#
+# return void
+#
+'''
+def collectFilesFromDirectory(directory, extensionList, destinationDir):
+	listOfFile = getFilePaths(directory, extensionList)
+	
+	for sourceFilename in listOfFile:
+
+		path, name 	= os.path.split(sourceFilename)
+
+		if not os.path.exists(destinationDir):
+			os.makedirs(destinationDir)
+		destinationFilename = os.getcwd()+os.sep+destinationDir+os.sep+name
+		if not os.path.exists(destinationFilename):
+			copyfile(sourceFilename, destinationFilename)
+		else :
+			prefix_num 	= random.randrange(1,99999999)
+			destinationFilename = os.getcwd()+os.sep+destinationDir+os.sep+str(prefix_num)+"_"+name
+			copyfile(sourceFilename, destinationFilename)
+		
 				
 if __name__ == '__main__':
 	
@@ -259,7 +290,8 @@ if __name__ == '__main__':
 	# printDict(groupFile)
 
 	# renameFileWithHashValue(directory)
-	changeFileExtension(directory, '.pyn')
+	# changeFileExtension(directory, '.pyn')
+	collectFilesFromDirectory(directory, ['.py'],'py')
 	end = time.time()
 	print ('End time : '+str(time.clock()))
 	print('Running time : '+str(end - start))

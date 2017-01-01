@@ -13,6 +13,7 @@ The script include multiple functions related with file system operation. I writ
 * printDict(extensionDict)
 * renameFileWithHashValue(directory)
 * changeFileExtension(directory, newExt, oldExt='.*' )
+* collectFilesFromDirectory(directory, extensionList, destinationDir)
 
 ### Function Details
 
@@ -93,6 +94,18 @@ param oldExt : <string> old file extension type
 param newExt : <string> new file extension type
 
 return void
+
+#### collectFilesFromDirectory(directory, extensionList, destinationDir)
+
+Collect deeply all files from directory and change their extensions. And copy them destination directory.
+If there duplicate name file. It adds prefix filename
+
+param directory : <string> directory name
+param oldExt : <string> file extension type
+param newExt : <string> destination directory name
+
+return void
+
 
 
 
